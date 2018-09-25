@@ -1,9 +1,11 @@
 F=boot
+SOURCE=$(F).asm
+BIN=$(F).bin
 
-all: $(F).bin run
+all: $(BIN) run
 
-$(F).bin: $(F).asm
-	nasm $(F).asm -f bin -o $(F).bin
+$(BIN): $(SOURCE)
+	nasm $(SOURCE) -f bin -o $(BIN)
 
 run:
-	 qemu-system-x86_64 -curses -drive format=raw,file=$(F).bin
+	 qemu-system-x86_64 -curses -drive format=raw,file=$(BIN)
