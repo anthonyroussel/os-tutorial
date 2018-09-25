@@ -15,7 +15,7 @@ BOOTING_MSG:
 
 ; file inclusions
 ; ===============
-%include "print_string.asm"
+%include "functions/print_string.asm"
 
 ; bios magic number
 ; =================
