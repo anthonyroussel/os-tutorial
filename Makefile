@@ -1,5 +1,9 @@
 F=boot
 
-all: $(F).asm
+all: $(F).bin run
+
+$(F).bin: $(F).asm
 	nasm $(F).asm -f bin -o $(F).bin
-	qemu-system-x86_64 $(F).bin
+
+run:
+	 qemu-system-x86_64 -curses -drive format=raw,file=$(F).bin
