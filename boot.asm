@@ -6,6 +6,11 @@
   ; wait indefinitely
   jmp $
 
+; file inclusions
+; ===============
+%include "functions/print_string.asm"
+%include "functions/cls.asm"
+
 ; data
 ; ====
 BOOTING_MSG:
@@ -13,11 +18,13 @@ BOOTING_MSG:
   ; and write directly into binary output file
   db 'Booting OS...', 0
 
-; file inclusions
-; ===============
-%include "functions/print_string.asm"
 
 ; bios magic number
 ; =================
 times 510-($-$$) db 0
 dw 0xaa55
+
+; disk data
+; =========
+times 256 dw 0xdada
+times 256 dw 0xface
