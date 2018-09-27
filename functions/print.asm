@@ -1,4 +1,4 @@
-print_string:
+print:
   ; Push registers onto the stack
   pusha
 

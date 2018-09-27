@@ -1,5 +1,5 @@
 ; load DH sectors to ES : BX from drive DL
-read_disk:
+disk_load:
   push dx
 
   ; BIOS read sector function
@@ -26,7 +26,7 @@ read_disk:
 
 disk_error:
   mov bx, DISK_ERROR_MSG
-  call print_string
+  call print
   jmp $
 
 DISK_ERROR_MSG: db 'Disk read error!', 0

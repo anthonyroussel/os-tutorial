@@ -54,7 +54,7 @@ set_letter:
 print_hex_done:
   ; Print the string pointed to by bx
   mov bx, HEX_OUT
-  call print_string
+  call print
 
   ; Pop the initial register values back from the stack
   popa
