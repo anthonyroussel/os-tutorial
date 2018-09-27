@@ -1,20 +1,31 @@
-F=boot
-SOURCE=$(F).asm
-BIN=$(F).bin
+# $@ = target file
+# $< = first dependency
+# $^ = all dependencies
+#
+# First rule is the one executed when no parameters are fed to the Makefile
+all: run
 
-all: $(BIN) run
+# bootsector
+boot.bin: boot.asm
+	nasm $< -f bin -o $@
 
-$(BIN): $(SOURCE)
-	nasm $(SOURCE) -f bin -o $(BIN)
+# kernel
+kernel.bin: kernel_entry.o kernel.o
+	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
-run:
-	 qemu-system-x86_64 -curses -drive format=raw,file=$(BIN)
+kernel_entry.o: kernel_entry.asm
+	nasm $< -f elf -o $@
 
-mbr: $(BIN)
+kernel.o: kernel.c
+	gcc -fno-pie -m32 -ffreestanding -c $< -o $@
 
-kernel:
-	gcc -ffreestanding -c kernel.c -o kernel.o
-	ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
+# os image
+os-image.bin: boot.bin kernel.bin
+	cat $^ > $@
 
-image: mbr kernel
-	cat $(BIN) kernel.bin > os-image.img
+# utils
+run: os-image.bin
+	qemu-system-x86_64 -fda $<
+
+clean:
+	rm -f *.bin *.o
