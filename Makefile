@@ -2,14 +2,14 @@
 # $< = first dependency
 # $^ = all dependencies
 #
-C_SOURCES = $(wildcard kernel/*.c)
-HEADERS = $(wildcard kernel/*.h)
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h)
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o}
 
 #
 CC := gcc
-CFLAGS += -m32 -fno-pie
+CFLAGS += -g -m32 -fno-pie
 LD := ld
 LDFLAGS += -m elf_i386
 GDB := gdb
