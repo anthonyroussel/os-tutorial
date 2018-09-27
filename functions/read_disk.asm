@@ -29,4 +29,5 @@ disk_error:
   call print
   jmp $
 
-DISK_ERROR_MSG: db 'Disk read error!', 0
+DISK_ERROR_MSG:
+  db 'Disk read error!', 0x0d, 0x0a, 0
