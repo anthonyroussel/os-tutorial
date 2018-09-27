@@ -1,1 +1,1 @@
-requires gcc, gcc-multilib (cross-compilation), nasm
+requires gcc, gcc-multilib (cross-compilation), nasm, gdb, qemu
