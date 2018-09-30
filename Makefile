@@ -51,4 +51,4 @@ run: os-image.bin
 	qemu-system-x86_64 -drive format=raw,file=$<,index=0,if=floppy
 
 clean:
-	@rm -f */*.bin */*.o *.bin
+	@rm -f */*.bin */*.o */*.elf *.bin
