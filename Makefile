@@ -40,8 +40,10 @@ boot/kernel.elf: boot/kernel_entry.o ${OBJ}
 	nasm $< -f bin -o $@
 
 # Open the connection to qemu and load our kernel-object file with symbols
+# qemu is invoked with debugging options
+# * see https://en.wikibooks.org/wiki/QEMU/Invocation
 debug: os-image.bin boot/kernel.elf
-	qemu-system-x86_64 -s -drive format=raw,file=$<,index=0,if=floppy &
+	qemu-system-x86_64 -s -drive format=raw,file=$<,index=0,if=floppy -d guest_errors,int &
 	${GDB} -ex "target remote localhost:1234" -ex "symbol-file boot/kernel.elf"
 
 # utils
