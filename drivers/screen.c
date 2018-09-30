@@ -1,6 +1,7 @@
 #include "screen.h"
 #include "ports.h"
-#include "../kernel/util.h"
+#include "../libc/mem.h"
+#include "../libc/string.h"
 
 /**
  * Print a message on the specified location

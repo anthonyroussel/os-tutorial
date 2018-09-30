@@ -2,8 +2,8 @@
 # $< = first dependency
 # $^ = all dependencies
 #
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c cpu/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c cpu/*.c libc/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h libc/*.h)
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
@@ -15,7 +15,7 @@ LDFLAGS += -m elf_i386
 GDB := gdb
 
 # First rule is the one executed when no parameters are fed to the Makefile
-all: run
+all: os-image.bin
 
 # os image
 os-image.bin: boot/boot.bin boot/kernel.bin

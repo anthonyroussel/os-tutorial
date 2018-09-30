@@ -2,7 +2,8 @@
 #include "idt.h"
 #include "../drivers/ports.h"
 #include "../drivers/screen.h"
-#include "../kernel/util.h"
+#include "../libc/mem.h"
+#include "../libc/string.h"
 
 isr_t interrupt_handlers[256];
 

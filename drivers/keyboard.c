@@ -2,7 +2,9 @@
 #include "ports.h"
 #include "../cpu/isr.h"
 #include "screen.h"
-#include "../kernel/util.h"
+#include "../libc/string.h"
+
+void print_letter(u8 scancode);
 
 static void keyboard_callback(registers_t regs) {
   /* pic leaves us the scancode in port 0x60 */
