@@ -4,11 +4,11 @@
 #include "screen.h"
 #include "../libc/string.h"
 
-void print_letter(u8 scancode);
+void print_letter(uint8_t scancode);
 
 static void keyboard_callback(registers_t regs) {
   /* pic leaves us the scancode in port 0x60 */
-  u8 scancode = port_byte_in(0x60);
+  uint8_t scancode = port_byte_in(0x60);
 
   char *sc_ascii;
   int_to_ascii(scancode, sc_ascii);
@@ -24,7 +24,7 @@ void init_keyboard() {
   register_interrupt_handler(IRQ1, keyboard_callback);
 }
 
-void print_letter(u8 scancode) {
+void print_letter(uint8_t scancode) {
   switch (scancode) {
     case 0x0:
       kprint("ERROR");

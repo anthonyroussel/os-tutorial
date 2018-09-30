@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "mem.h"
 
 void memory_copy(char *source, char *dest, int length) {
@@ -7,8 +8,8 @@ void memory_copy(char *source, char *dest, int length) {
   }
 }
 
-void memory_set(u8 *dest, u8 value, u32 length) {
-  u8 *temp = (u8*) dest;
+void memory_set(uint8_t *dest, uint8_t value, uint32_t length) {
+  uint8_t *temp = (uint8_t*) dest;
   for (; length != 0; length--) {
     *temp++ = value;
   }
