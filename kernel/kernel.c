@@ -8,11 +8,7 @@ void kernel_main() {
   kprint("DixieOS\n\n");
 
   isr_install();
+  irq_install();
 
-  asm volatile("sti");
-  init_timer(50);
-  /* Comment out the timer IRQ handler to read
-   * the keyboard IRQs easier */
-  init_keyboard();
 }
 
