@@ -19,6 +19,12 @@ typedef struct {
   /* This must always be zero */
   u8 always0;
   /* More flags, see documentation */
+  /* First byte
+   * Bit 7: "Interrupt is present"
+   * Bits 6-5: Privilege level of caller (0=kernel..3=user)
+   * Bit 4: Set to 0 for interrupt gates
+   * Bits 3-0: bits 1110 = decimal 14 = "32 bit interrupt gate"
+   */
   u8 flags;
   /* The upper 16 bits of the address to jump to */
   u16 high_offset;
