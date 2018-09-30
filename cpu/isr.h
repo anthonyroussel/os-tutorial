@@ -76,18 +76,18 @@ typedef struct {
   /* Data segment selector */
   uint32_t ds;
   /* Pushed by pusha */
-  uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+  uint32_t edi, esi, ebp, useless, ebx, edx, ecx, eax;
   /* Interrupt number and error code (if applicable) */
   uint32_t int_no, err_code;
   /* Pushed by the processor automatically. */
-  uint32_t eip, cs, eflags, useresp, ss;
+  uint32_t eip, cs, eflags, usp, ss;
 } registers_t;
 
 void isr_install();
-void isr_handler(registers_t r);
+void isr_handler(registers_t *r);
 void irq_install();
 
-typedef void (*isr_t)(registers_t);
+typedef void (*isr_t)(registers_t*);
 void register_interrupt_handler(uint8_t n, isr_t handler);
 
 #endif
