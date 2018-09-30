@@ -3,7 +3,7 @@
 #include "../drivers/keyboard.h"
 #include "../drivers/screen.h"
 
-void main() {
+void kernel_main() {
   clear_screen();
   kprint("DixieOS\n\n");
 
