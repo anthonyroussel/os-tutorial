@@ -9,7 +9,7 @@ OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
 #
 CC := gcc
-CFLAGS += -g -m32 -fno-pie
+CFLAGS += -g -ffreestanding -Wall -Wextra -fno-exceptions -m32 -fno-pie
 LD := ld
 LDFLAGS += -m elf_i386
 GDB := gdb
@@ -31,7 +31,7 @@ boot/kernel.elf: boot/kernel_entry.o ${OBJ}
 # Generic rules for wildcards
 # To make an object, always compile from its .c
 %.o: %.c ${HEADERS}
-	${CC} ${CFLAGS} -ffreestanding -c $< -o $@
+	${CC} ${CFLAGS} -c $< -o $@
 
 %.o: %.asm
 	nasm $< -f elf -o $@
