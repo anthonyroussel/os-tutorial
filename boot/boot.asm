@@ -23,7 +23,7 @@ KERNEL_OFFSET equ 0x1000
 ; ===============
 %include "boot/print.asm"
 %include "boot/print_hex.asm"
-%include "boot/read_disk.asm"
+%include "boot/disk.asm"
 %include "boot/cls.asm"
 %include "boot/gdt.asm"
 %include "boot/print_pm.asm"

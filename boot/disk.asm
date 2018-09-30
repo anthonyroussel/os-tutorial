@@ -1,5 +1,6 @@
 ; load DH sectors to ES : BX from drive DL
 disk_load:
+  pusha
   push dx
 
   ; BIOS read sector function
@@ -21,13 +22,26 @@ disk_load:
   pop dx
   ; If AL (sectors read) != DH (sectors) expected, display error message
   cmp dh, al
-  jne disk_error
+  jne sectors_error
+  popa
   ret
 
 disk_error:
   mov bx, DISK_ERROR_MSG
   call print
+
+  mov dh, ah
+  call print_hex
+  jmp disk_loop
+
+sectors_error:
+  mov bx, SECTORS_ERROR_MSG
+  call print
+
+disk_loop:
   jmp $
 
 DISK_ERROR_MSG:
   db 'Disk read error!', 0x0d, 0x0a, 0
+SECTORS_ERROR_MSG:
+  db 'Incorrect number of sectors read', 0x0d, 0x0a, 0
